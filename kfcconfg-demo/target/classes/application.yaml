@@ -1,0 +1,10 @@
+
+spring:
+  application:
+    name: kfc-demo
+kfc:
+  a: 400
+  b: 200
+  c: 300
+server:
+  port: 8081
