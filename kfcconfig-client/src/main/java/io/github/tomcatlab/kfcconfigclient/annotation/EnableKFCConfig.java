@@ -1,6 +1,6 @@
 package io.github.tomcatlab.kfcconfigclient.annotation;
 
-import io.github.tomcatlab.kfcconfigclient.KfcConfigRegistrar;
+import io.github.tomcatlab.kfcconfigclient.config.KfcConfigRegistrar;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

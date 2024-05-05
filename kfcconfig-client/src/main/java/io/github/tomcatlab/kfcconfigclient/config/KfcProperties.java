@@ -1,4 +1,4 @@
-package io.github.tomcatlab.kfcconfigclient;
+package io.github.tomcatlab.kfcconfigclient.config;
 
 import org.springframework.core.env.EnumerablePropertySource;
 

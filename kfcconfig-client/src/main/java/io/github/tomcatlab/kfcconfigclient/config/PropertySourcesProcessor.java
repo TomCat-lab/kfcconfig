@@ -1,11 +1,12 @@
-package io.github.tomcatlab.kfcconfigclient;
+package io.github.tomcatlab.kfcconfigclient.config;
 
-import io.github.tomcatlab.kfcconfigclient.config.ConfigMeta;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
@@ -13,13 +14,11 @@ import org.springframework.core.env.CompositePropertySource;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Data
 @Slf4j
-public class PropertySourcesProcessor implements BeanFactoryPostProcessor, PriorityOrdered, EnvironmentAware {
+public class PropertySourcesProcessor implements BeanFactoryPostProcessor, ApplicationContextAware, PriorityOrdered, EnvironmentAware {
     Environment environment;
+    ApplicationContext applicationContext;
     private final String PROPERTYSOURCENAME = "KfcPropertiesSource";
     private final String PROPERTYSOURCENAMES = "KfcPropertiesSources";
 
@@ -39,7 +38,7 @@ public class PropertySourcesProcessor implements BeanFactoryPostProcessor, Prior
         String ns = ENV.getProperty("kfcconfig.ns", "public");
         String configServer = ENV.getProperty("kkconfig.configServer", "http://localhost:9129");
         ConfigMeta configMeta = new ConfigMeta(app, env, ns, configServer);
-        KfcConfigService kfcConfigService = KfcConfigService.getInstance(configMeta);
+        KfcConfigService kfcConfigService = KfcConfigService.getInstance(applicationContext,configMeta);
         KfcProperties kfcProperties = new KfcProperties(PROPERTYSOURCENAME, kfcConfigService);
         CompositePropertySource composite= new CompositePropertySource(PROPERTYSOURCENAMES);
         composite.addPropertySource(kfcProperties);

@@ -17,4 +17,6 @@ public interface KfcRepository {
     }
 
     Map<String,String> getConfig();
+
+    void addListener(KfcRepositoryChangeListener listener);
 }
