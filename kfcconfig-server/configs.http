@@ -14,3 +14,6 @@ Content-Type: application/json
   "kfc.d": "dd200",
   "kfc.f": "ff200"
 }
+
+### demo 8888
+GET http://localhost:8081/demo
